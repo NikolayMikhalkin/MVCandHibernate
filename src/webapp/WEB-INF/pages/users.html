@@ -13,15 +13,25 @@
             <th>Name</th>
             <th>LastName</th>
             <th>Age</th>
+            <th>Action</th>
         </tr>
         <tbody>
         <tr th:each="user : ${users}">
             <td th:text="${user.getName()}">Name</td>
             <td th:text="${user.getLastName()}">LastName</td>
             <td th:text="${user.getAge()}">Age</td>
+            <td>
+                <!--<a th:href="">remove</a>-->
+                <a th:href="@{/add_user}">add</a>
+                <a th:href="@{/get_user}">update</a>
+            </td>
         </tr>
         </tbody>
     </table>
+</div>
+<div>
+    <h4>for add new user <a th:href="@{/get-user}">add</a></h4>
+    <h4>clean table</h4>
 </div>
 <br/>
 </body>

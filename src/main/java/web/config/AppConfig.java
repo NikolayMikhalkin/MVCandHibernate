@@ -1,9 +1,5 @@
 package web.config;
 
-import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -23,7 +22,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(value = "web")
 public class AppConfig {
-
     private final Environment env;
 
     @Autowired
@@ -43,18 +41,18 @@ public class AppConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean entManFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setDataSource(getDataSource());
 
-        Properties properties = new Properties();
-        properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2dll.auto"));
+        Properties props = new Properties();
+        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
-        entManFactoryBean.setDataSource(getDataSource());
-        entManFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entManFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entManFactoryBean.setJpaProperties(properties);
-        entManFactoryBean.setPackagesToScan(env.getProperty("db.model.package"));
-        return entManFactoryBean;
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        factoryBean.setJpaVendorAdapter(vendorAdapter);
+        factoryBean.setJpaProperties(props);
+        factoryBean.setPackagesToScan(env.getProperty("db.entity.package"));
+        return factoryBean;
     }
 
     @Bean
@@ -63,5 +61,4 @@ public class AppConfig {
         transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
         return transactionManager;
     }
-
 }

@@ -13,7 +13,7 @@ public class User {
     private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "fullName")
+    @Column(name = "last_name")
     private String lastName;
     @Column(name = "age")
     private byte age;
@@ -21,7 +21,6 @@ public class User {
     public User() {}
 
     public User(String name, String lastName, byte age) {
-        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
