@@ -8,25 +8,24 @@
 <body>
 <br>
 <div>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>LastName</th>
-            <th>Age</th>
-            <th>Action</th>
+    <table th:border="1">
+        <tr th:align=center>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Дата рождения</th>
+            <th>Действия</th>
         </tr>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.getName()}">Name</td>
-            <td th:text="${user.getLastName()}">LastName</td>
-            <td th:text="${user.getAge()}">Age</td>
-            <td>
-                <!--<a th:href="">remove</a>-->
-                <a th:href="@{/add_user}">add</a>
-                <a th:href="@{/get_user}">update</a>
+        <tr th:each="user : ${allUsers}" th:align=center>
+            <td th:text="${user.getId()}"/>
+            <td th:text="${user.getFirstName()}"/>
+            <td th:text="${user.getLastName()}"/>
+            <td th:text="${user.getId()}"/>
+            <td th:align=center>
+                <a th:href="@{/edit-user(id=${user.getId()})}">Редактировать</a>
+                <a th:href="@{/delete-user(id=${user.getId()})}">Удалить</a>
             </td>
         </tr>
-        </tbody>
     </table>
 </div>
 <div>

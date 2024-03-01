@@ -40,4 +40,5 @@ public class UserServiceImp implements UserService {
     public void updateUser(User user) {
         userDao.updateUser(user);
     }
+
 }
