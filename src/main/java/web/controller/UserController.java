@@ -3,6 +3,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
@@ -20,20 +21,14 @@ public class UserController {
         this.userServiceImp = userServiceImp;
     }
 
-    /*@ModelAttribute("user")
-    public User getOurUser() {
-        return new User();
-    }*/
-
     @GetMapping("/")
     public String getHomePage() {
         return "homePage";
     }
 
     @GetMapping(value = "/users")
-    public String printUsers(ModelMap model) {
-        List<User> users = userServiceImp.getAllUsers();
-        model.addAttribute("users", users);
+    public String showUsers(Model model) {
+        model.addAttribute("users", userServiceImp.getAllUsers());
         return "users";
     }
 
@@ -49,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/edit-user")
-    public  String showGetUserForm(@ModelAttribute("user") User user) {
+    public  String showEditUserForm(@ModelAttribute("user") User user) {
         return "updateUser";
     }
 
@@ -60,8 +55,18 @@ public class UserController {
     }
 
     @GetMapping("/remove-user")
+    /*public String deleteUser(@RequestParam("id") Long id) {
+        userServiceImp.removeUser(id);
+        return "redirect:/users";
+    }*/
     public String deleteUser(@RequestParam("id") Long id) {
         userServiceImp.removeUser(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/clean-table")
+    public String cleanTable() {
+        userServiceImp.cleanTable();
         return "redirect:/users";
     }
 }

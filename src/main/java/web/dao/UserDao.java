@@ -13,4 +13,6 @@ public interface UserDao {
 
     public void updateUser(User user);
 
+    void cleanTable();
+
 }

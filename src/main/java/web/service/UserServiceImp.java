@@ -41,4 +41,9 @@ public class UserServiceImp implements UserService {
         userDao.updateUser(user);
     }
 
+    @Override
+    public void cleanTable() {
+        userDao.cleanTable();
+    }
+
 }

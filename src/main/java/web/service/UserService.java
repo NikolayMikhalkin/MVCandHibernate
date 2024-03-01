@@ -13,4 +13,6 @@ public interface UserService {
     public void removeUser(Long id);
 
     void updateUser(User user);
+
+    void cleanTable();
 }
