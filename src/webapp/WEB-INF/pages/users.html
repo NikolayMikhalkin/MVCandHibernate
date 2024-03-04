@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Car's list</title>
+    <title>User's list</title>
 </head>
 
 <body>
@@ -25,11 +25,15 @@
                     <button type="submit">Update</button>
                     <br><br>
                 </form>-->
-                <form th:method="DELETE" th:action="@{/delete-user(id=${user.getId()})}">
+                <!--<form th:method="DELETE" th:action="@{/delete-user(id=${user.getId()})}">
                     <input type="submit" name="_method" value="Delete"/>
+                </form>-->
+                <!--<a th:href="@{/edit-user(id=${user.getId()})}">edit</a>
+                &lt;!&ndash;<a th:href="@{/remove-user(id=${user.getId()})}">remove</a>&ndash;&gt;
+                <form th:action="@{/remove-user}" method="post">
+                    <input type="hidden" name="id" th:value="${user.getId()}">
+                    <button type="submit">Delete</button>-->
                 </form>
-                <a th:href="@{/edit-user(id=${user.getId()})}">edit</a>
-                <a th:href="@{/delete-user(id=${user.getId()})}">remove</a>
             </td>
         </tr>
     </table>

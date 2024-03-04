@@ -55,14 +55,20 @@ public class UserController {
     }
 
     @GetMapping("/remove-user")
+    public String deleteUser(@RequestParam("id") Long id){
+        userServiceImp.removeUser(id);
+        return "redirect:/users";
+    }
+
+    /*@PostMapping("/remove-user")
+    public String deleteUser(@ModelAttribute("user") User user) {
+        userServiceImp.removeUser(user);
+        return "redirect:/users";
+    }*/
     /*public String deleteUser(@RequestParam("id") Long id) {
         userServiceImp.removeUser(id);
         return "redirect:/users";
     }*/
-    public String deleteUser(@RequestParam("id") Long id) {
-        userServiceImp.removeUser(id);
-        return "redirect:/users";
-    }
 
     @GetMapping("/clean-table")
     public String cleanTable() {

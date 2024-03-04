@@ -36,6 +36,11 @@ public class UserServiceImp implements UserService {
         userDao.removeUser(id);
     }
 
+    /*@Override
+    public void removeUser(User user) {
+        userDao.removeUser(user);
+    }*/
+
     @Override
     public void updateUser(User user) {
         userDao.updateUser(user);

@@ -11,6 +11,8 @@ public interface UserDao {
 
     public void removeUser(Long id);
 
+    //public void removeUser(User user);
+
     public void updateUser(User user);
 
     void cleanTable();

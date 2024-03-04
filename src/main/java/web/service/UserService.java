@@ -12,6 +12,8 @@ public interface UserService {
 
     public void removeUser(Long id);
 
+    //public void removeUser(User user);
+
     void updateUser(User user);
 
     void cleanTable();
